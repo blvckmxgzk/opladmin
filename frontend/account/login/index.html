@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/login.css">
-    <script src="../../javascript/express.js"></script>
+    <script src="../../javascript/account.js" defer></script>
     <title>Login</title>
 </head>
 <body>
     <div class="container">
         <img src="../../../backend/img/IMG_0780.webp" class="logo">
-        <input type="text" class="username-text">
-        <input type="password" class="password-text">
-        <input type="button" value="Login" class="login-btn">
-        <input type="button" value="Request an Account" class="request-btn">
+        <input type="text" class="username-text" placeholder="Username" id="username-text">
+        <input type="password" class="password-text" placeholder="Password" id="password-text">
+        <input type="button" value="Login" class="login-btn" id="login-btn" onclick="login()">
+        <input type="button" value="Request an Account" class="request-btn" id="request-btn" onclick="request_clicked()">
     </div>
 </body>
 </html>
