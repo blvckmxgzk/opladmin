@@ -33,6 +33,6 @@ async function login() {
   }
 }
 
-async function request_clicked() {
+async function l_request_clicked() {
   location.href = "../request/index.html"
 }
