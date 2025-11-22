@@ -1,0 +1,16 @@
+body {
+  background-color: rgb(40, 40, 40);
+}
+
+.navbar {
+  background-color: rgb(20, 20, 20);
+  opacity: 0.2;
+  border-radius: 2rem;
+  width: auto;
+  height: 4rem;
+}
+
+.logo {
+  height: 100%;
+  margin-left: 0.9rem;
+}
