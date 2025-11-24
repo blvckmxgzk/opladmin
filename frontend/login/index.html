@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/login.css" />
+    <script src="../javascript/account.js" defer></script>
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <img src="../assets/IMG_0780.webp" class="logo" />
+      <div class="username-field">
+        <img src="../assets/user.png" class="user-icon">
+        <input
+          type="text"
+          class="username-text"
+          placeholder="Username"
+          id="username-text"
+      /></div>
+      <div class="password-field">
+        <img src="../assets/eye-crossed.png" class="pass-icon">
+        <input type="button" value="" class="pass-show">
+        <input
+          type="password"
+          class="password-text"
+          placeholder="Password"
+          id="password-text"
+      /></div>
+      <input
+        type="button"
+        value="Login"
+        class="login-btn"
+        id="login-btn"
+        onclick="login()"
+      />
+    </div>
+  </body>
+</html>
