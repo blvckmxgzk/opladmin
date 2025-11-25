@@ -7,9 +7,9 @@ async function clicked() {
       "https://users.roblox.com/v1/usernames/users",
       {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          usernames: [username.textContent],
+          usernames: [toString(username.textContent)],
           excludeBannedUsers: true,
         }),
       }
@@ -17,20 +17,32 @@ async function clicked() {
 
     if (response.ok) {
       try {
-        const data = await response.json()
+        const data = await response.json();
         const sendres = await fetch(
           "https://oplbackend.onrender.com/admin/wl/grant",
           {
             method: "POST",
-            headers: { "content-type": "application/json" },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ rank: 0, userid: data.data[0].id }),
           }
         );
 
-        if (sendres.ok) location.reload()
+        if (sendres.ok) {
+          location.reload();
+        } else {
+          const txt = document.createElement("p");
+          txt.id = "err";
+          txt.textContent = sendres.statusText;
+          document.appendChild(txt);
+        }
       } catch (error) {
         console.error(error);
       }
+    } else {
+      const txt = document.createElement("p");
+      txt.id = "err";
+      txt.textContent = response.statusText;
+      document.appendChild(txt);
     }
   } catch (error) {
     console.error(error);

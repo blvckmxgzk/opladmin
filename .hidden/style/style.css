@@ -120,5 +120,13 @@ body {
 }
 
 .username-text:focus > .username-field {
-  border-color: rgb(255,0,255);
+  border-color: rgb(255, 0, 255);
+}
+
+#err {
+  color: white;
+  font-size: 6px;
+  width: 100%;
+  height: 100%;
+  font-family:'Courier New', Courier, monospace
 }
