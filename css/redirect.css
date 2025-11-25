@@ -1,0 +1,22 @@
+body {
+    background: rgb(20,20,20);
+}
+
+.logo {
+    display: flex;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 15rem;
+    height: 15rem;
+}
+
+.redirect-text {
+    display: flex;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 16px;
+}
