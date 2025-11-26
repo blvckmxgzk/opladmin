@@ -27,12 +27,12 @@ async function clicked() {
       "https://oplbadkend.onrender.com/users",
       {
         method: "POST",
-        body: {
+        body: JSON.stringify({
           // The original code used toString(username.textContent) which is likely incorrect.
           // It should probably be just username.textContent if it's an element,
           // or username.value if it's an input field. Assuming it's a text element.
           username: username.value,
-        },
+        }),
       }
     );
 
@@ -55,7 +55,7 @@ async function clicked() {
           "https://oplbackend.onrender.com/admin/wl/grant",
           {
             method: "POST",
-            body: { rank: 0, userid: userId },
+            body: JSON.stringify({ rank: 0, userid: userId }),
           }
         );
 
