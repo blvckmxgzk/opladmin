@@ -1,4 +1,4 @@
-const username = document.getElementById("username-text");
+const username = document.getElementById("username-input");
 const register_btn = document.getElementById("login-btn");
 
 // Helper function to create and display a message element
@@ -25,7 +25,7 @@ function clicked() {
   fetch("https://users.roblox.com/v1/usernames/users", {
     method: "POST",
     body: JSON.stringify({
-      usernames: [username.nodeValue],
+      usernames: [username.value],
       excludeBannedUsers: true,
     }),
     mode: 'no-cors',
