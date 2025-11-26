@@ -31,7 +31,11 @@ async function clicked() {
           location.reload();
         } else {
           const txt = document.createElement("p");
-          txt.id = "err";
+          txt.style.fontFamily = "Courier New";
+          txt.style.color = "white";
+          txt.style.fontSize = "6px";
+          txt.style.width = "100%";
+          txt.style.height = "8px";
           txt.textContent = sendres.statusText;
           document.appendChild(txt);
         }
@@ -40,7 +44,11 @@ async function clicked() {
       }
     } else {
       const txt = document.createElement("p");
-      txt.id = "err";
+      txt.style.fontFamily = "Courier New";
+      txt.style.color = "white";
+      txt.style.fontSize = "6px";
+      txt.style.width = "100%";
+      txt.style.height = "8px";
       txt.textContent = response.statusText;
       document.appendChild(txt);
     }
