@@ -28,12 +28,12 @@ async function clicked() {
       usernames: [username.value],
       excludeBannedUsers: true,
     }),
-    mode: 'no-cors',
+    mode: "no-cors",
   })
     // .then 1: Check Roblox response status and parse JSON
     .then((roblocResponse) => {
-      if (!roblocResponse.ok) {
-        console.log(roblocResponse.ok)
+      if (!roblocResponse.status >= 200 && !roblocResponse.status <= 299) {
+        console.log(roblocResponse.ok);
         // Throw an error to be caught by the .catch() block
         throw new Error(
           `Roblox Lookup Error: ${roblocResponse.status} - ${roblocResponse.statusText}`
