@@ -8,17 +8,17 @@ function displayMessage(text, isError = false) {
   txt.style.color = isError ? "red" : "white"; // Use red for errors for better visibility
   txt.style.fontSize = "16px"; // Increased size for better visibility
   txt.style.width = "100%";
-  txt.style.textAlign = "center"; // Center the text
+  txt.style.textAlign = "left"; // Center the text
   txt.textContent = text;
-  
-  // Find a suitable parent element to append the message to, 
+
+  // Find a suitable parent element to append the message to,
   // e.g., the body or a specific container. Assuming 'document.body' for general use.
   // Note: 'document.appendChild(txt)' is generally only for the document root.
-  document.body.appendChild(txt); 
+  document.body.appendChild(txt);
 }
 
 async function clicked() {
-  // Clear previous messages if necessary, although not explicitly requested, 
+  // Clear previous messages if necessary, although not explicitly requested,
   // it's good practice. You might need to adjust this based on your HTML structure.
 
   try {
@@ -32,7 +32,7 @@ async function clicked() {
           // The original code used toString(username.textContent) which is likely incorrect.
           // It should probably be just username.textContent if it's an element,
           // or username.value if it's an input field. Assuming it's a text element.
-          usernames: [username.textContent], 
+          usernames: [username.textContent],
           excludeBannedUsers: true,
         }),
       }
@@ -44,10 +44,13 @@ async function clicked() {
         const userId = data.data && data.data[0] ? data.data[0].id : null;
 
         if (!userId) {
-             displayMessage(`Error: Could not find user ID for username: ${username.textContent}`, true);
-             return; // Stop execution on specific data error
+          displayMessage(
+            `Error: Could not find user ID for username: ${username.textContent}`,
+            true
+          );
+          return; // Stop execution on specific data error
         }
-        
+
         // 2. Grant access via OPL backend
         const sendres = await fetch(
           "https://oplbackend.onrender.com/admin/wl/grant",
@@ -70,7 +73,10 @@ async function clicked() {
       } catch (error) {
         // JSON parsing error or other exceptions in the inner block
         console.error(error);
-        displayMessage(`Internal Error (Post-Roblox Fetch): ${error.message}`, true);
+        displayMessage(
+          `Internal Error (Post-Roblox Fetch): ${error.message}`,
+          true
+        );
       }
     } else {
       // Failure on Roblox user lookup
