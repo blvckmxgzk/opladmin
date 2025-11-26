@@ -35,6 +35,7 @@ The application is fully functional in the Replit environment:
 - Added cache control headers to prevent caching issues in Replit iframe
 - Configured workflow to run on port 5000 with webview output
 - Updated .gitignore for Node.js and Replit files
+- Fixed force-register page styling by linking to shared login.css and fonts.css
 
 ## How to Run
 The application starts automatically via the configured workflow:
