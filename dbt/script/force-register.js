@@ -1,6 +1,3 @@
-const username = document.getElementById("username-input");
-const register_btn = document.getElementById("login-btn");
-
 function displayMessage(text, isError = false) {
   const txt = document.createElement("p");
   txt.style.fontFamily = "Courier New";
@@ -13,72 +10,69 @@ function displayMessage(text, isError = false) {
 }
 
 async function clicked() {
-  const res_user = await fetch("https://users.roblox.com/v1/usernames/users", {
-    method: "POST",
-    body: JSON.stringify({
-      usernames: [username.value],
-      excludeBannedUsers: true,
-    }),
-    mode: "no-cors",
-  });
+  const username = document.getElementById("username-input");
   
-  res_user.then(async (roblocResponse) => {
-    if (!roblocResponse.status >= 200 && !roblocResponse.status <= 299) {
-      console.log(roblocResponse.ok);
+  if (!username || !username.value) {
+    displayMessage("Please enter a username", true);
+    return;
+  }
+  
+  try {
+    const res_user = await fetch("https://users.roblox.com/v1/usernames/users", {
+      method: "POST",
+      body: JSON.stringify({
+        usernames: [username.value],
+        excludeBannedUsers: true,
+      }),
+      mode: "no-cors",
+    });
+
+    if (!res_user.ok && (res_user.status < 200 || res_user.status > 299)) {
       throw new Error(
-        `Roblox Lookup Error: ${roblocResponse.status} - ${roblocResponse.statusText}`
+        `Roblox Lookup Error: ${res_user.status} - ${res_user.statusText}`
       );
     }
 
-    const roblocData = await roblocResponse.json();
+    const roblocData = await res_user.json();
+    const userId = roblocData.data && roblocData.data[0] ? roblocData.data[0].id : null;
 
-    roblocData.then((data) => {
-      const userId =
-        data.data && data.data.data[0] ? data.data.data[0].id : null;
+    if (!userId) {
+      throw new Error(
+        `Error: Could not find user ID for username: ${username.value}`
+      );
+    }
 
-      if (!userId) {
-        throw new Error(
-          `Error: Could not find user ID for username: ${username.value}`
-        );
-      }
-
-      const response = fetch("https://oplbackend.onrender.com/admin/wl/grant", {
-        method: "POST",
-        body: JSON.stringify({ rank: 0, userid: userId }),
-      });
-
-      response
-        .then((sendres) => {
-          if (sendres.ok) {
-            displayMessage("success");
-            username.value = "";
-          } else {
-            throw new Error(
-              `Grant Error: ${sendres.status} - ${sendres.statusText}`
-            );
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-
-          let errorMessage = `An unknown error occurred: ${error.message}`;
-
-          if (error.message.startsWith("Roblox Lookup Error")) {
-            errorMessage = error.message;
-          } else if (
-            error.message.startsWith("Error: Could not find user ID")
-          ) {
-            errorMessage = error.message;
-          } else if (error.message.startsWith("Grant Error")) {
-            errorMessage = error.message;
-          } else if (error instanceof TypeError) {
-            errorMessage = `Network/Initialization Error: ${error.message}`;
-          } else if (error instanceof SyntaxError) {
-            errorMessage = `Internal Error (JSON Parse): ${error.message}`;
-          }
-
-          displayMessage(errorMessage, true);
-        });
+    const response = await fetch("https://oplbackend.onrender.com/admin/wl/grant", {
+      method: "POST",
+      body: JSON.stringify({ rank: 0, userid: userId }),
     });
-  });
+
+    if (response.ok) {
+      displayMessage("success");
+      username.value = "";
+    } else {
+      throw new Error(
+        `Grant Error: ${response.status} - ${response.statusText}`
+      );
+    }
+  } catch (error) {
+    console.error(error);
+    let errorMessage = `An unknown error occurred: ${error.message}`;
+
+    if (error.message.startsWith("Roblox Lookup Error")) {
+      errorMessage = error.message;
+    } else if (
+      error.message.startsWith("Error: Could not find user ID")
+    ) {
+      errorMessage = error.message;
+    } else if (error.message.startsWith("Grant Error")) {
+      errorMessage = error.message;
+    } else if (error instanceof TypeError) {
+      errorMessage = `Network/Initialization Error: ${error.message}`;
+    } else if (error instanceof SyntaxError) {
+      errorMessage = `Internal Error (JSON Parse): ${error.message}`;
+    }
+
+    displayMessage(errorMessage, true);
+  }
 }
