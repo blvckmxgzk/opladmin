@@ -39,7 +39,7 @@ async function clicked() {
           `Roblox Lookup Error: ${roblocResponse.status} - ${roblocResponse.statusText}`
         );
       }
-      print(roblocResponse.json())
+      console.log(roblocResponse.json())
       return roblocResponse.json(); // Return the promise for JSON parsing
     })
 
