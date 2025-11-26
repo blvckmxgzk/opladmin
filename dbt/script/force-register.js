@@ -31,7 +31,7 @@ async function clicked() {
     mode: "no-cors",
   })
     // .then 1: Check Roblox response status and parse JSON
-    .then((roblocResponse) => {
+    .then(async (roblocResponse) => {
       if (!roblocResponse.status >= 200 && !roblocResponse.status <= 299) {
         console.log(roblocResponse.ok);
         // Throw an error to be caught by the .catch() block
@@ -39,8 +39,8 @@ async function clicked() {
           `Roblox Lookup Error: ${roblocResponse.status} - ${roblocResponse.statusText}`
         );
       }
-      console.log(roblocResponse.json())
-      return roblocResponse.json(); // Return the promise for JSON parsing
+      
+      return await roblocResponse.json(); // Return the promise for JSON parsing
     })
 
     // .then 2: Extract User ID and Grant access
