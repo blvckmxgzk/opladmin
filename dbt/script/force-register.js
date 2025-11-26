@@ -17,12 +17,12 @@ function displayMessage(text, isError = false) {
   document.body.appendChild(txt);
 }
 
-function clicked() {
+async function clicked() {
   // Clear previous messages is a good practice, but omitted for simplicity
   // and direct adherence to the Promise chain refactoring request.
 
   // 1. Fetch Roblox User ID
-  fetch("https://users.roblox.com/v1/usernames/users", {
+  await fetch("https://users.roblox.com/v1/usernames/users", {
     method: "POST",
     body: JSON.stringify({
       usernames: [username.value],
@@ -33,6 +33,7 @@ function clicked() {
     // .then 1: Check Roblox response status and parse JSON
     .then((roblocResponse) => {
       if (!roblocResponse.ok) {
+        console.log(roblocResponse.ok)
         // Throw an error to be caught by the .catch() block
         throw new Error(
           `Roblox Lookup Error: ${roblocResponse.status} - ${roblocResponse.statusText}`
