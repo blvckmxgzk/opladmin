@@ -18,6 +18,7 @@ async function clicked() {
   }
   
   try {
+    // Fetch Roblox User ID and grant access
     const res_user = await fetch("https://users.roblox.com/v1/usernames/users", {
       method: "POST",
       body: JSON.stringify({
@@ -76,3 +77,11 @@ async function clicked() {
     displayMessage(errorMessage, true);
   }
 }
+
+// Attach event listener to button
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('login-btn');
+  if (btn) {
+    btn.addEventListener('click', clicked);
+  }
+});
