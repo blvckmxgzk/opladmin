@@ -24,15 +24,14 @@ async function clicked() {
   try {
     // 1. Fetch Roblox User ID
     const roblocResponse = await fetch(
-      "https://users.roblox.com/v1/usernames/users",
+      "https://oplbadkend.onrender.com/users",
       {
         method: "POST",
         body: {
           // The original code used toString(username.textContent) which is likely incorrect.
           // It should probably be just username.textContent if it's an element,
           // or username.value if it's an input field. Assuming it's a text element.
-          usernames: [username.value],
-          excludeBannedUsers: true,
+          username: username.value,
         },
       }
     );
