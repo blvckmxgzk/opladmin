@@ -26,7 +26,7 @@ async function clicked() {
     const roblocResponse = await fetch(
       "https://oplbadkend.onrender.com/users",
       {
-        method: "GET",
+        method: "POST",
         body: {
           // The original code used toString(username.textContent) which is likely incorrect.
           // It should probably be just username.textContent if it's an element,
