@@ -39,11 +39,12 @@ async function clicked() {
     if (roblocResponse.ok) {
       try {
         const data = await roblocResponse.json();
-        const userId = data.data && data.data[0] ? data.data[0].id : null;
+        const userId =
+          data.data && data.data.data[0] ? data.data.data[0].id : null;
 
         if (!userId) {
           displayMessage(
-            `Error: Could not find user ID for username: ${username.textContent}`,
+            `Error: Could not find user ID for username: ${username.value}`,
             true
           );
           return; // Stop execution on specific data error
@@ -61,7 +62,7 @@ async function clicked() {
         if (sendres.ok) {
           // Success case
           displayMessage("success");
-          location.reload();
+          username.value = "";
         } else {
           // Failure on OPL backend grant
           const errorText = `Grant Error: ${sendres.status} - ${sendres.statusText}`;
