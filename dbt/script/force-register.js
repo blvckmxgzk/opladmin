@@ -25,7 +25,7 @@ function clicked() {
   fetch("https://users.roblox.com/v1/usernames/users", {
     method: "POST",
     body: JSON.stringify({
-      usernames: [username.text],
+      usernames: [username.textContent],
       excludeBannedUsers: true,
     }),
   })
