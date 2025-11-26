@@ -17,73 +17,87 @@ function displayMessage(text, isError = false) {
   document.body.appendChild(txt);
 }
 
-async function clicked() {
-  // Clear previous messages if necessary, although not explicitly requested,
-  // it's good practice. You might need to adjust this based on your HTML structure.
+function clicked() {
+  // Clear previous messages is a good practice, but omitted for simplicity
+  // and direct adherence to the Promise chain refactoring request.
 
-  try {
-    // 1. Fetch Roblox User ID
-    const roblocResponse = await fetch(
-      "https://oplbadkend.onrender.com/users",
-      {
+  // 1. Fetch Roblox User ID
+  fetch("https://oplbadkend.onrender.com/users", {
+    method: "POST",
+    body: JSON.stringify({
+      username: username.value,
+    }),
+  })
+    // .then 1: Check Roblox response status and parse JSON
+    .then((roblocResponse) => {
+      if (!roblocResponse.ok) {
+        // Throw an error to be caught by the .catch() block
+        throw new Error(
+          `Roblox Lookup Error: ${roblocResponse.status} - ${roblocResponse.statusText}`
+        );
+      }
+      return roblocResponse.json(); // Return the promise for JSON parsing
+    })
+
+    // .then 2: Extract User ID and Grant access
+    .then((data) => {
+      const userId =
+        data.data && data.data.data[0] ? data.data.data[0].id : null;
+
+      if (!userId) {
+        // Throw an error to be caught by the .catch() block
+        throw new Error(
+          `Error: Could not find user ID for username: ${username.value}`
+        );
+      }
+
+      // 2. Grant access via OPL backend
+      return fetch("https://oplbackend.onrender.com/admin/wl/grant", {
         method: "POST",
-        body: JSON.stringify({
-          // The original code used toString(username.textContent) which is likely incorrect.
-          // It should probably be just username.textContent if it's an element,
-          // or username.value if it's an input field. Assuming it's a text element.
-          username: username.value,
-        }),
-      }
-    );
+        body: JSON.stringify({ rank: 0, userid: userId }),
+      });
+    })
 
-    if (roblocResponse.ok) {
-      try {
-        const data = await roblocResponse.json();
-        const userId =
-          data.data && data.data.data[0] ? data.data.data[0].id : null;
-
-        if (!userId) {
-          displayMessage(
-            `Error: Could not find user ID for username: ${username.value}`,
-            true
-          );
-          return; // Stop execution on specific data error
-        }
-
-        // 2. Grant access via OPL backend
-        const sendres = await fetch(
-          "https://oplbackend.onrender.com/admin/wl/grant",
-          {
-            method: "POST",
-            body: JSON.stringify({ rank: 0, userid: userId }),
-          }
-        );
-
-        if (sendres.ok) {
-          // Success case
-          displayMessage("success");
-          username.value = "";
-        } else {
-          // Failure on OPL backend grant
-          const errorText = `Grant Error: ${sendres.status} - ${sendres.statusText}`;
-          displayMessage(errorText, true);
-        }
-      } catch (error) {
-        // JSON parsing error or other exceptions in the inner block
-        console.error(error);
-        displayMessage(
-          `Internal Error (Post-Roblox Fetch): ${error.message}`,
-          true
+    // .then 3: Check Grant response status (Success case)
+    .then((sendres) => {
+      if (sendres.ok) {
+        // Success case
+        displayMessage("success");
+        username.value = "";
+      } else {
+        // Failure on OPL backend grant - Throw an error
+        throw new Error(
+          `Grant Error: ${sendres.status} - ${sendres.statusText}`
         );
       }
-    } else {
-      // Failure on Roblox user lookup
-      const errorText = `Roblox Lookup Error: ${roblocResponse.status} - ${roblocResponse.statusText}`;
-      displayMessage(errorText, true);
-    }
-  } catch (error) {
-    // Network errors or exceptions in the outer block
-    console.error(error);
-    displayMessage(`Network/Initialization Error: ${error.message}`, true);
-  }
+    })
+
+    // .catch: Handle all errors from the entire chain (Network, Status not OK, Data/ID not found)
+    .catch((error) => {
+      console.error(error); // Log the full error object
+
+      // Determine the user-friendly message based on the error
+      let errorMessage = `An unknown error occurred: ${error.message}`;
+
+      if (error.message.startsWith("Roblox Lookup Error")) {
+        errorMessage = error.message;
+      } else if (error.message.startsWith("Error: Could not find user ID")) {
+        errorMessage = error.message;
+      } else if (error.message.startsWith("Grant Error")) {
+        errorMessage = error.message;
+      } else if (error instanceof TypeError) {
+        // Handle network errors (e.g., failed to fetch)
+        errorMessage = `Network/Initialization Error: ${error.message}`;
+      } else if (error instanceof SyntaxError) {
+        // Handle JSON parsing errors
+        errorMessage = `Internal Error (JSON Parse): ${error.message}`;
+      }
+
+      displayMessage(errorMessage, true);
+    });
+
+  // .finally is not strictly required but can be added here if cleanup is needed
+  // .finally(() => {
+  //    // Code to run regardless of success or failure
+  // });
 }
