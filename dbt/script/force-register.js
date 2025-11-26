@@ -27,14 +27,13 @@ async function clicked() {
       "https://users.roblox.com/v1/usernames/users",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+        body: {
           // The original code used toString(username.textContent) which is likely incorrect.
           // It should probably be just username.textContent if it's an element,
           // or username.value if it's an input field. Assuming it's a text element.
-          usernames: [username.textContent],
+          usernames: [username.value],
           excludeBannedUsers: true,
-        }),
+        },
       }
     );
 
@@ -56,8 +55,7 @@ async function clicked() {
           "https://oplbackend.onrender.com/admin/wl/grant",
           {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ rank: 0, userid: userId }),
+            body: { rank: 0, userid: userId },
           }
         );
 
