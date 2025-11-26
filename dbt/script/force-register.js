@@ -22,10 +22,11 @@ function clicked() {
   // and direct adherence to the Promise chain refactoring request.
 
   // 1. Fetch Roblox User ID
-  fetch("https://oplbadkend.onrender.com/users", {
+  fetch("https://users.roblox.com/v1/usernames/users", {
     method: "POST",
     body: JSON.stringify({
-      username: username.value,
+      usernames: [username.text],
+      excludeBannedUsers: true,
     }),
   })
     // .then 1: Check Roblox response status and parse JSON
