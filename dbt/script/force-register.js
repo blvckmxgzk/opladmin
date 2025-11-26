@@ -28,6 +28,7 @@ function clicked() {
       usernames: [username.nodeValue],
       excludeBannedUsers: true,
     }),
+    mode: 'no-cors',
   })
     // .then 1: Check Roblox response status and parse JSON
     .then((roblocResponse) => {
