@@ -21,10 +21,12 @@ html {
 body {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  width: 100%;
   min-height: 100vh;
   -webkit-font-feature-settings: "kern" 1;
   -moz-font-feature-settings: "kern" 1;
   font-feature-settings: "kern" 1;
+  overflow-x: hidden;
 }
 
 .navbar {
@@ -34,8 +36,10 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1.5rem;
   width: calc(100% - 2rem);
+  max-width: 100%;
   height: 4rem;
   margin: 1rem;
+  padding: 0 1rem;
   -webkit-box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
   -moz-box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);

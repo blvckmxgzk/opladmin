@@ -39,6 +39,7 @@ html {
 body {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    width: 100%;
     min-height: 100vh;
     display: -webkit-flex;
     display: -moz-flex;
@@ -49,7 +50,8 @@ body {
     -webkit-justify-content: center;
     -moz-justify-content: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: auto;
+    padding: 1rem;
     -webkit-animation: fadeIn 1s ease-out;
     -moz-animation: fadeIn 1s ease-out;
     animation: fadeIn 1s ease-out;
@@ -111,6 +113,38 @@ body::before {
     -webkit-animation: textGlow 3s ease-in-out infinite;
     -moz-animation: textGlow 3s ease-in-out infinite;
     animation: textGlow 3s ease-in-out infinite;
+    text-align: center;
+    max-width: 90vw;
+    padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .redirect-text {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+  }
+
+  .logo {
+    width: 8rem !important;
+    height: 8rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .redirect-text {
+    font-size: 1.25rem;
+    letter-spacing: 0.3px;
+  }
+
+  .logo {
+    width: 6rem !important;
+    height: 6rem !important;
+  }
+
+  body::before {
+    width: 300px;
+    height: 300px;
+  }
 }
 
 @keyframes bounce {
