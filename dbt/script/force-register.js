@@ -20,14 +20,12 @@ async function clicked() {
   try {
     // Fetch Roblox User ID and grant access
     const res_user = await fetch(
-      "https://users.roblox.com/v1/usernames/users",
+      "https://oplbackend.onrender.com/users",
       {
         method: "POST",
         body: JSON.stringify({
-          usernames: [username.value],
-          excludeBannedUsers: true,
+          usernames: username.value,
         }),
-        mode: "no-cors",
         headers: {
           Accept: "application/json",
           "content-type": "application/json",
@@ -44,7 +42,7 @@ async function clicked() {
 
     const roblocData = await res_user.json();
     const userId =
-      roblocData.data && roblocData.data[0] ? roblocData.data[0].id : null;
+      roblocData.data && roblocData.data ? roblocData.data.id : null;
 
     if (!userId) {
       throw new Error(
