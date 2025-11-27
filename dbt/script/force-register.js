@@ -107,6 +107,9 @@ async function clicked() {
   }
 }
 
+// Make clicked function globally accessible
+window.clicked = clicked;
+
 // Attach event listener to button
 document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("login-btn");
