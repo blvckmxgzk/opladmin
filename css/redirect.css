@@ -1,8 +1,12 @@
 @keyframes float {
   0%, 100% {
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
   }
   50% {
+    -webkit-transform: translate(-50%, -60%);
+    -moz-transform: translate(-50%, -60%);
     transform: translate(-50%, -60%);
   }
 }
@@ -27,15 +31,31 @@
   }
 }
 
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     min-height: 100vh;
+    display: -webkit-flex;
+    display: -moz-flex;
     display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
     align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
     justify-content: center;
     overflow: hidden;
+    -webkit-animation: fadeIn 1s ease-out;
+    -moz-animation: fadeIn 1s ease-out;
     animation: fadeIn 1s ease-out;
+    -webkit-font-feature-settings: "kern" 1;
+    -moz-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern" 1;
 }
 
 body::before {
@@ -48,41 +68,60 @@ body::before {
   background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
+  -webkit-animation: float 6s ease-in-out infinite;
+  -moz-animation: float 6s ease-in-out infinite;
   animation: float 6s ease-in-out infinite;
 }
 
 .logo {
+    display: -webkit-flex;
+    display: -moz-flex;
     display: flex;
     position: absolute;
     top: 40%;
     left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
     width: 12rem;
     height: 12rem;
+    -webkit-filter: drop-shadow(0 8px 24px rgba(59, 130, 246, 0.3));
     filter: drop-shadow(0 8px 24px rgba(59, 130, 246, 0.3));
+    -webkit-animation: bounce 4s ease-in-out infinite;
+    -moz-animation: bounce 4s ease-in-out infinite;
     animation: bounce 4s ease-in-out infinite;
 }
 
 .redirect-text {
+    display: -webkit-flex;
+    display: -moz-flex;
     display: flex;
     position: absolute;
     top: 60%;
     left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
     font-size: 2rem;
-    font-family: 'Montserrat VF', sans-serif;
+    font-family: 'Montserrat VF', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.9);
     letter-spacing: 1px;
     text-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    -webkit-animation: textGlow 3s ease-in-out infinite;
+    -moz-animation: textGlow 3s ease-in-out infinite;
     animation: textGlow 3s ease-in-out infinite;
 }
 
 @keyframes bounce {
   0%, 100% {
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
   }
   50% {
+    -webkit-transform: translate(-50%, -58%);
+    -moz-transform: translate(-50%, -58%);
     transform: translate(-50%, -58%);
   }
 }
