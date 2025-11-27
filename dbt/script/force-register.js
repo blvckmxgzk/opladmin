@@ -11,31 +11,40 @@ function displayMessage(text, isError = false) {
 
 async function clicked() {
   const username = document.getElementById("username-input");
-  
+
   if (!username || !username.value) {
     displayMessage("Please enter a username", true);
     return;
   }
-  
+
   try {
     // Fetch Roblox User ID and grant access
-    const res_user = await fetch("https://users.roblox.com/v1/usernames/users", {
-      method: "POST",
-      body: JSON.stringify({
-        usernames: [username.value],
-        excludeBannedUsers: true,
-      }),
-      mode: "no-cors",
-    });
+    const res_user = await fetch(
+      "https://users.roblox.com/v1/usernames/users",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          usernames: [username.value],
+          excludeBannedUsers: true,
+        }),
+        mode: "no-cors",
+        headers: {
+          Accept: "application/json",
+          "content-type": "application/json",
+        },
+      }
+    );
 
     if (!res_user.ok && (res_user.status < 200 || res_user.status > 299)) {
+      console.log(res_user.status, res_user);
       throw new Error(
         `Roblox Lookup Error: ${res_user.status} - ${res_user.statusText}`
       );
     }
 
     const roblocData = await res_user.json();
-    const userId = roblocData.data && roblocData.data[0] ? roblocData.data[0].id : null;
+    const userId =
+      roblocData.data && roblocData.data[0] ? roblocData.data[0].id : null;
 
     if (!userId) {
       throw new Error(
@@ -43,10 +52,13 @@ async function clicked() {
       );
     }
 
-    const response = await fetch("https://oplbackend.onrender.com/admin/wl/grant", {
-      method: "POST",
-      body: JSON.stringify({ rank: 0, userid: userId }),
-    });
+    const response = await fetch(
+      "https://oplbackend.onrender.com/admin/wl/grant",
+      {
+        method: "POST",
+        body: JSON.stringify({ rank: 0, userid: userId }),
+      }
+    );
 
     if (response.ok) {
       displayMessage("success");
@@ -62,9 +74,7 @@ async function clicked() {
 
     if (error.message.startsWith("Roblox Lookup Error")) {
       errorMessage = error.message;
-    } else if (
-      error.message.startsWith("Error: Could not find user ID")
-    ) {
+    } else if (error.message.startsWith("Error: Could not find user ID")) {
       errorMessage = error.message;
     } else if (error.message.startsWith("Grant Error")) {
       errorMessage = error.message;
@@ -79,9 +89,9 @@ async function clicked() {
 }
 
 // Attach event listener to button
-document.addEventListener('DOMContentLoaded', function() {
-  const btn = document.getElementById('login-btn');
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.getElementById("login-btn");
   if (btn) {
-    btn.addEventListener('click', clicked);
+    btn.addEventListener("click", clicked);
   }
 });
