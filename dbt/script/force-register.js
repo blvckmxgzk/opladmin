@@ -9,6 +9,27 @@ function displayMessage(text, isError = false) {
   document.body.appendChild(txt);
 }
 
+function setButtonLoading(isLoading) {
+  const btn = document.getElementById("login-btn");
+  if (!btn) return;
+
+  if (isLoading) {
+    btn.disabled = true;
+    const spinner = document.createElement("span");
+    spinner.className = "spinner";
+    spinner.id = "btn-spinner";
+    btn.textContent = "";
+    btn.appendChild(spinner);
+    const text = document.createTextNode("Processing");
+    btn.appendChild(text);
+  } else {
+    btn.disabled = false;
+    const spinner = document.getElementById("btn-spinner");
+    if (spinner) spinner.remove();
+    btn.textContent = "force-register";
+  }
+}
+
 async function clicked() {
   const username = document.getElementById("username-input");
 
@@ -21,6 +42,9 @@ async function clicked() {
   }
 
   console.log(`Starting registration process for username: ${username.value}`);
+
+  // Show loading spinner and disable button
+  setButtonLoading(true);
 
   try {
     // Step 1: Fetch Roblox User ID
@@ -104,6 +128,9 @@ async function clicked() {
     }
 
     displayMessage(errorMessage, true);
+  } finally {
+    // Hide loading spinner and enable button
+    setButtonLoading(false);
   }
 };
 
