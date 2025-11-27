@@ -105,10 +105,7 @@ async function clicked() {
 
     displayMessage(errorMessage, true);
   }
-}
-
-// Make clicked function globally accessible
-window.clicked = clicked;
+};
 
 // Attach event listener to button
 document.addEventListener("DOMContentLoaded", function () {
