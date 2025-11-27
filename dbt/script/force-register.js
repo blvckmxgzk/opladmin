@@ -18,8 +18,7 @@ async function clicked() {
   }
 
   try {
-    // Step 1: Fetch Roblox User ID
-    displayMessage("Looking up Roblox username...");
+    // Fetch Roblox User ID and grant access
     const res_user = await fetch(
       "https://oplbackend.onrender.com/users",
       {
@@ -51,11 +50,6 @@ async function clicked() {
       );
     }
 
-    // Step 2: Confirm user ID found
-    displayMessage(`Username found: ${username.value} (ID: ${userId})`);
-
-    // Step 3: Grant whitelist access
-    displayMessage("Granting whitelist access...");
     const response = await fetch(
       "https://oplbackend.onrender.com/admin/wl/grant",
       {
@@ -68,8 +62,7 @@ async function clicked() {
     );
 
     if (response.ok) {
-      // Step 4: Success
-      displayMessage("✓ User registered successfully!");
+      displayMessage("success");
       username.value = "";
     } else {
       throw new Error(
@@ -95,11 +88,3 @@ async function clicked() {
     displayMessage(errorMessage, true);
   }
 }
-
-// Attach event listener to button
-document.addEventListener("DOMContentLoaded", function () {
-  const btn = document.getElementById("login-btn");
-  if (btn) {
-    btn.addEventListener("click", clicked);
-  }
-});
