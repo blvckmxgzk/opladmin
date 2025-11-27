@@ -15,8 +15,30 @@ if (passShowBtn && passwordInput && passIcon) {
   });
 }
 
+// Button loading state function
+function setButtonLoading(isLoading) {
+  const btn = document.querySelector('.login-btn');
+  if (!btn) return;
+
+  if (isLoading) {
+    btn.disabled = true;
+    const spinner = document.createElement("span");
+    spinner.className = "spinner";
+    spinner.id = "btn-spinner";
+    btn.textContent = "";
+    btn.appendChild(spinner);
+    const text = document.createTextNode("Logging in");
+    btn.appendChild(text);
+  } else {
+    btn.disabled = false;
+    const spinner = document.getElementById("btn-spinner");
+    if (spinner) spinner.remove();
+    btn.textContent = "login";
+  }
+}
+
 // Login function
-function login() {
+async function login() {
   const username = document.getElementById('username-text').value;
   const password = document.getElementById('password-text').value;
 
@@ -26,13 +48,25 @@ function login() {
     return;
   }
 
-  // For demo purposes, accept any credentials
-  // In a real application, this would validate against a backend
-  localStorage.setItem('logged-in', 'true');
-  localStorage.setItem('username', username);
-  
-  // Redirect to home page
-  window.location.href = '/home';
+  // Show loading spinner
+  setButtonLoading(true);
+
+  try {
+    // Simulate a small delay for better UX
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // For demo purposes, accept any credentials
+    // In a real application, this would validate against a backend
+    localStorage.setItem('logged-in', 'true');
+    localStorage.setItem('username', username);
+    
+    // Redirect to home page
+    window.location.href = '/home';
+  } catch (error) {
+    console.error('Login error:', error);
+    setButtonLoading(false);
+    alert('An error occurred during login');
+  }
 }
 
 // Allow Enter key to submit
