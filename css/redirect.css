@@ -34,6 +34,8 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 100%;
 }
 
 body {
@@ -41,12 +43,16 @@ body {
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     width: 100%;
     height: 100vh;
+    max-height: 100vh;
+    display: -webkit-box;
     display: -webkit-flex;
     display: -moz-flex;
     display: flex;
+    -webkit-box-align: center;
     -webkit-align-items: center;
     -moz-align-items: center;
     align-items: center;
+    -webkit-box-pack: center;
     -webkit-justify-content: center;
     -moz-justify-content: center;
     justify-content: center;

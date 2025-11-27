@@ -38,6 +38,7 @@ The application is fully functional in the Replit environment:
 - **Font Support**: Added maximum browser compatibility with all Montserrat font weights (100-900) using TTF format with vendor prefixes (-webkit-, -moz-)
 - **Responsive Design**: Implemented mobile-first responsive layout with media queries for tablets (768px) and mobile (480px)
 - **Full Screen Fit**: Configured all pages to fit full browser viewport without scrollbars using flexbox centering and overflow:hidden
+- **Safari Compatibility**: Added old-style webkit prefixes (-webkit-box, -webkit-box-align, -webkit-box-pack) for proper Safari flexbox support and centering
 - **Cross-Browser Support**: Added vendor prefixes to all CSS properties (transforms, filters, animations, box-shadows, flexbox) for maximum compatibility across Chrome, Firefox, Safari, and Edge
 
 ## How to Run
