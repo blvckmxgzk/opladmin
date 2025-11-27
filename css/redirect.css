@@ -1,3 +1,32 @@
+@keyframes float {
+  0%, 100% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-50%, -60%);
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    opacity: 0.9;
+    text-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 body {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
     font-family: 'Montserrat', sans-serif;
@@ -6,6 +35,7 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    animation: fadeIn 1s ease-out;
 }
 
 body::before {
@@ -18,6 +48,7 @@ body::before {
   background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
+  animation: float 6s ease-in-out infinite;
 }
 
 .logo {
@@ -29,6 +60,7 @@ body::before {
     width: 12rem;
     height: 12rem;
     filter: drop-shadow(0 8px 24px rgba(59, 130, 246, 0.3));
+    animation: bounce 4s ease-in-out infinite;
 }
 
 .redirect-text {
@@ -43,4 +75,14 @@ body::before {
     color: rgba(255, 255, 255, 0.9);
     letter-spacing: 1px;
     text-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    animation: textGlow 3s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-50%, -58%);
+  }
 }
