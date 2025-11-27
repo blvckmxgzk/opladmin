@@ -18,7 +18,8 @@ async function clicked() {
   }
 
   try {
-    // Fetch Roblox User ID and grant access
+    // Step 1: Fetch Roblox User ID
+    displayMessage("Looking up Roblox username...");
     const res_user = await fetch(
       "https://oplbackend.onrender.com/users",
       {
@@ -27,8 +28,7 @@ async function clicked() {
           usernames: username.value,
         }),
         headers: {
-          Accept: "application/json",
-          "content-type": "application/json",
+          "Content-Type": "application/json",
         },
       }
     );
@@ -40,7 +40,8 @@ async function clicked() {
       );
     }
 
-    const roblocData = await res_user.json();
+    let roblocData = res_user.json();
+    roblocData = JSON.parse(roblocData);
     const userId =
       roblocData.data && roblocData.data ? roblocData.data.id : null;
 
@@ -50,16 +51,25 @@ async function clicked() {
       );
     }
 
+    // Step 2: Confirm user ID found
+    displayMessage(`Username found: ${username.value} (ID: ${userId})`);
+
+    // Step 3: Grant whitelist access
+    displayMessage("Granting whitelist access...");
     const response = await fetch(
       "https://oplbackend.onrender.com/admin/wl/grant",
       {
         method: "POST",
         body: JSON.stringify({ rank: 0, userid: userId }),
+        headers: {
+          "Content-Type": "application/json",
+        }
       }
     );
 
     if (response.ok) {
-      displayMessage("success");
+      // Step 4: Success
+      displayMessage("✓ User registered successfully!");
       username.value = "";
     } else {
       throw new Error(
