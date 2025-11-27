@@ -28,14 +28,14 @@ The application is fully functional in the Replit environment:
 - Login flow redirects properly based on authentication state
 - All pages and assets load correctly
 
-## Recent Changes (November 26, 2025)
-- Created `javascript/account.js` for login functionality (was missing from original repo)
-- Set up `server.js` Node.js HTTP server for static file serving
-- Configured proper directory handling to prevent EISDIR errors
-- Added cache control headers to prevent caching issues in Replit iframe
-- Configured workflow to run on port 5000 with webview output
-- Updated .gitignore for Node.js and Replit files
-- Fixed force-register page styling by linking to shared login.css and fonts.css
+## Recent Changes (November 27, 2025)
+- Transformed design to liquid glass (glassmorphism) aesthetic with Apple-inspired visual style
+- Added smooth animations: logo bounces, inputs slide in with staggered timing, button floats on hover
+- Updated all CSS files (login.css, main.css, redirect.css) with new gradient backgrounds and blur effects
+- Removed input pulse animation when typing, button gradient shimmer, and expand animation on hover
+- Added floating animation to button on hover (floats 2-8px continuously)
+- Fixed force-register JavaScript click handler using addEventListener instead of inline onclick
+- Updated force-register.js to fetch username from correct DOM element ID
 
 ## How to Run
 The application starts automatically via the configured workflow:
