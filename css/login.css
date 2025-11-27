@@ -311,11 +311,17 @@ body::before {
 }
 
 .pass-show {
-  opacity: 0;
+  opacity: 1;
   cursor: pointer;
+  background: none;
+  border: none;
+  width: auto;
+  height: auto;
+  padding: 0;
   -webkit-transition: opacity 0.3s ease;
   -moz-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
+  z-index: 10;
 }
 
 .username-text,
