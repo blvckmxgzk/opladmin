@@ -68,7 +68,7 @@ body {
   -webkit-justify-content: center;
   -moz-justify-content: center;
   justify-content: center;
-  overflow: auto;
+  overflow: hidden;
   padding: 1rem;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -106,6 +106,7 @@ body::before {
   position: relative;
   width: 90%;
   max-width: 24rem;
+  max-height: 90vh;
   padding: 2rem 1.5rem;
   background: rgba(15, 23, 42, 0.4);
   border-radius: 2.5rem;
@@ -124,6 +125,7 @@ body::before {
   -webkit-animation: fadeInUp 1s ease-out;
   -moz-animation: fadeInUp 1s ease-out;
   animation: fadeInUp 1s ease-out;
+  overflow: hidden;
 }
 
 @keyframes bounce {

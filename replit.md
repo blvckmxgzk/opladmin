@@ -29,13 +29,16 @@ The application is fully functional in the Replit environment:
 - All pages and assets load correctly
 
 ## Recent Changes (November 27, 2025)
-- Transformed design to liquid glass (glassmorphism) aesthetic with Apple-inspired visual style
-- Added smooth animations: logo bounces, inputs slide in with staggered timing, button floats on hover
-- Updated all CSS files (login.css, main.css, redirect.css) with new gradient backgrounds and blur effects
-- Removed input pulse animation when typing, button gradient shimmer, and expand animation on hover
-- Added floating animation to button on hover (floats 2-8px continuously)
-- Fixed force-register JavaScript click handler using addEventListener instead of inline onclick
-- Updated force-register.js to fetch username from correct DOM element ID
+- **UI Design**: Transformed entire dashboard to liquid glass (glassmorphism) aesthetic with Apple-inspired visual style
+- **Animations**: Added smooth animations including logo bounce, input field slide-ins with staggered timing, and button float effects
+- **Styling**: Updated all CSS files (login.css, main.css, redirect.css) with gradient backgrounds and blur effects
+- **Button**: Added floating animation on hover (floats 2-8px continuously)
+- **Password Visibility**: Fixed show password button by setting opacity to 1 and proper z-index
+- **Force Register**: Fixed JavaScript click handler and username input ID references
+- **Font Support**: Added maximum browser compatibility with all Montserrat font weights (100-900) using TTF format with vendor prefixes (-webkit-, -moz-)
+- **Responsive Design**: Implemented mobile-first responsive layout with media queries for tablets (768px) and mobile (480px)
+- **Full Screen Fit**: Configured all pages to fit full browser viewport without scrollbars using flexbox centering and overflow:hidden
+- **Cross-Browser Support**: Added vendor prefixes to all CSS properties (transforms, filters, animations, box-shadows, flexbox) for maximum compatibility across Chrome, Firefox, Safari, and Edge
 
 ## How to Run
 The application starts automatically via the configured workflow:

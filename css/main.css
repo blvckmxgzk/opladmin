@@ -22,11 +22,11 @@ body {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   -webkit-font-feature-settings: "kern" 1;
   -moz-font-feature-settings: "kern" 1;
   font-feature-settings: "kern" 1;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .navbar {
