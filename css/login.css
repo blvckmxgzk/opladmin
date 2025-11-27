@@ -1,122 +1,149 @@
 body {
-  background: rgb(20, 20, 20);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
   font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 .container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   width: 24rem;
   height: 30rem;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 2rem;
-  border-width: 1px;
-  border-color: rgb(0, 170, 255);
-  border-style: solid;
-  box-shadow: 0 0 10px 2px rgb(0, 170, 255);
-  backdrop-filter: blur(5px);
+  background: rgba(15, 23, 42, 0.4);
+  border-radius: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(31, 38, 135, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 .logo {
-  position: inherit;
+  position: relative;
   image-rendering: auto;
   width: 10rem;
   height: 10rem;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  top: 17.5%;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.2));
 }
 
 .username-field,
 .password-field {
-  position: inherit;
-  display: inherit;
+  position: relative;
+  display: flex;
+  align-items: center;
   width: 20rem;
   height: 2.5rem;
-  transform: inherit;
-  top: 45%;
-  left: 50%;
-  background-color: rgba(0, 0, 0, 0);
-  border-radius: 20rem;
-  border-color: rgb(0, 170, 255);
-  border-style: solid;
-  border-width: 1px;
+  margin: 0.75rem 0;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
-  box-shadow: 0 0 10px 2px rgb(0, 170, 255);
-  align-content: center;
+  transition: all 0.3s ease;
 }
 
-.password-field {
-  top: 60%;
+.username-field:hover,
+.password-field:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+}
+
+.username-field:focus-within,
+.password-field:focus-within {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
 }
 
 .login-btn {
-  position: inherit;
-  display: inherit;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 15rem;
   height: 3rem;
-  top: 80%;
-  left: inherit;
-  transform: inherit;
-  border-radius: 20rem;
-  background-color: lime;
+  margin-top: 1.5rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: white;
   font-family: 'Montserrat VF', sans-serif;
   font-size: 1.5rem;
-  font-weight: bolder;
-  justify-content: center;
-  text-align: center;
-  border-color: rgb(0, 170, 0);
-  border-style: solid;
-  border-width: 2px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  box-shadow: 0 0 10px 2px rgb(0, 170, 0);
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
-    width 0.2s ease-in-out height 0.2s ease-in-out;
-}
-
-.user-icon,
-.pass-icon,
-.pass-show {
-  display: inherit;
-  position: inherit;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  height: 60%;
-  left: 8.5%;
-  filter: invert(100%);
-}
-
-.pass-show {
-  opacity: 0;
-  cursor: pointer;
-}
-
-.username-text,
-.password-text {
-  position: inherit;
-  display: inherit;
-  color: white;
-  background-color: rgba(0, 0, 0, 0);
-  outline: none;
-  outline-width: 0;
-  height: 60%;
-  transform: translate(-100%, -50%);
-  top: 50%;
-  left: 95%;
-  width: 77.5%;
-  border: none;
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+  transition: all 0.3s ease;
 }
 
 .login-btn:hover {
   width: 16.5rem;
   height: 3.5rem;
-  transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.4);
+  transform: translateY(-2px);
 }
 
-.username-text:focus > .username-field {
-  border-color: rgb(255,0,255);
+.login-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.user-icon,
+.pass-icon,
+.pass-show {
+  display: flex;
+  position: absolute;
+  left: 1rem;
+  height: 60%;
+  filter: invert(100%);
+  opacity: 0.8;
+}
+
+.pass-show {
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.username-text,
+.password-text {
+  position: relative;
+  flex: 1;
+  color: white;
+  background-color: transparent;
+  outline: none;
+  padding: 0 1rem 0 3rem;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+}
+
+.username-text::placeholder,
+.password-text::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.username-text:focus,
+.password-text:focus {
+  color: white;
 }
