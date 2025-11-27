@@ -124,20 +124,11 @@ body::before {
   animation-delay: 0.4s;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
-  }
-  50% {
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
-  }
-}
-
 .username-field:hover,
 .password-field:hover {
   background-color: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.2);
-  animation: pulse 2s ease-in-out infinite;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
 }
 
 .username-field:focus-within,
