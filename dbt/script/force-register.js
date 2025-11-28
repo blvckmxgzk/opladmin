@@ -140,9 +140,6 @@ async function clicked() {
 document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("login-btn");
   if (btn) {
-    btn.addEventListener("click", new Promise(async (resolve) => {
-      await clicked();
-      resolve();
-    }));
+    btn.addEventListener("click", clicked)
   }
 });
