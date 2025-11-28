@@ -54,6 +54,7 @@ body {
   -webkit-animation: floatIn 0.8s ease-out;
   -moz-animation: floatIn 0.8s ease-out;
   animation: floatIn 0.8s ease-out;
+  z-index: 50;
 }
 
 .logo {
@@ -67,6 +68,7 @@ body {
   -webkit-transition: transform 0.3s ease;
   -moz-transition: transform 0.3s ease;
   transition: transform 0.3s ease;
+  z-index: 51;
 }
 
 .logo:hover {

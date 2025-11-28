@@ -78,6 +78,7 @@ body::before {
   -webkit-animation: float 6s ease-in-out infinite;
   -moz-animation: float 6s ease-in-out infinite;
   animation: float 6s ease-in-out infinite;
+  z-index: 0;
 }
 
 .logo {
@@ -97,6 +98,7 @@ body::before {
     -webkit-animation: bounce 4s ease-in-out infinite;
     -moz-animation: bounce 4s ease-in-out infinite;
     animation: bounce 4s ease-in-out infinite;
+    z-index: 2;
 }
 
 .redirect-text {
@@ -121,6 +123,7 @@ body::before {
     text-align: center;
     max-width: 90vw;
     padding: 0 1rem;
+    z-index: 1;
 }
 
 @media (max-width: 768px) {
