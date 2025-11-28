@@ -74,7 +74,7 @@ async function register() {
     if (!res_user.ok) {
       console.error(`Roblox Lookup Error: Status ${res_user.status}`, res_user);
       throw new Error(
-        `Roblox Lookup Error: ${res_user.status} - ${res_user.statusText}`
+        `Roblox Lookup Error: ${res_user.status} - ${res_user.error.message}`
       );
     }
 
@@ -118,7 +118,7 @@ async function register() {
     } else {
       console.error(`Grant Error: Status ${response.status}`, response);
       throw new Error(
-        `Grant Error: ${response.status} - ${response.statusText}`
+        `Grant Error: ${response.status} - ${response.error.message}`
       );
     }
   } catch (error) {
