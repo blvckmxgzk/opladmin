@@ -102,7 +102,7 @@ async function register() {
       "https://oplbackend.vercel.app/admin/wl/grant",
       {
         method: "POST",
-        body: JSON.stringify({ rank: 0, userid: userId }),
+        body: JSON.stringify({ rank: 0, userId: userId }),
         headers: {
           "Content-Type": "application/json",
         }
