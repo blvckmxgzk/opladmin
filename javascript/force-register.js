@@ -78,14 +78,10 @@ async function register() {
       );
     }
 
-    displayMessage("Roblox username found, processing...")
-
     let roblocData = await res_user.json();
 
     console.log(roblocData)
-    
-    roblocData = JSON.parse(roblocData);
-    
+        
     const userId =
       roblocData.data && roblocData.data ? roblocData.data.id : null;
 
