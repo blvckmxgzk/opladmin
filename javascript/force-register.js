@@ -1,4 +1,4 @@
-function displayMessage(text, isError = false) {
+เfunction displayMessage(text, isError = false) {
   let nextPosition = 0;
   const existingMessages = document.querySelectorAll("p");
 
@@ -72,10 +72,9 @@ async function register() {
     );
 
     if (!res_user.ok) {
-      const errorText = await res_user.text();
-      console.error(`Roblox Lookup Error: Status ${res_user.status}`, errorText);
+      console.error(`Roblox Lookup Error: Status ${res_user.status}`, res_user.error);
       throw new Error(
-        `Roblox Lookup Error: ${res_user.status} - ${res_user.statusText}. ${errorText}`
+        `Roblox Lookup Error: ${res_user.status} - ${res_user.statusText}. ${res_user.error.stack}`
       );
     }
 
@@ -112,13 +111,12 @@ async function register() {
     if (response.ok) {
       // Step 4: Success
       console.log(`Step 4: Success! User ${username.value} (ID: ${userId}) registered successfully`);
-      displayMessage("✓ User registered successfully!");
+      displayMessage("User registered successfully!");
       username.value = "";
     } else {
-      const errorText = await response.text();
-      console.error(`Grant Error: Status ${response.status}`, errorText);
+      console.error(`Grant Error: Status ${response.status}`, response);
       throw new Error(
-        `Grant Error: ${response.status} - ${response.statusText}. ${errorText}`
+        `Grant Error: ${response.status} - ${response.statusText}. ${response.error.stack}`
       );
     }
   } catch (error) {
