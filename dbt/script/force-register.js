@@ -63,7 +63,7 @@ async function clicked() {
       }
     );
 
-    if (!res_user.ok && (res_user.status < 200 || res_user.status > 299)) {
+    if (!res_user.ok) {
       console.error(`Roblox Lookup Error: Status ${res_user.status}`, res_user);
       throw new Error(
         `Roblox Lookup Error: ${res_user.status} - ${res_user.statusText}`
@@ -71,7 +71,9 @@ async function clicked() {
     }
 
     let roblocData = await res_user.json();
+    
     roblocData = JSON.parse(roblocData);
+    
     const userId =
       roblocData.data && roblocData.data ? roblocData.data.id : null;
 
