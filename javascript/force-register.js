@@ -41,7 +41,7 @@ function setButtonLoading(isLoading) {
 async function register() {
   const username = document.getElementById("username-input");
 
-  console.log("Force register action initiated");
+    displayMessage("Force register action initiated");
 
   if (!username || !username.value) {
     console.log("Validation failed: username field not found or empty");
@@ -49,7 +49,7 @@ async function register() {
     return;
   }
 
-  console.log(`Starting registration process for username: ${username.value}`);
+  displayMessage(`Starting registration process for username: ${username.value}`);
 
   // Show loading spinner and disable button
   setButtonLoading(true);
@@ -78,7 +78,11 @@ async function register() {
       );
     }
 
+    displayMessage("Roblox username found, processing...")
+
     let roblocData = await res_user.json();
+
+    console.log(roblocData)
     
     roblocData = JSON.parse(roblocData);
     
