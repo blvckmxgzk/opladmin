@@ -1,23 +1,23 @@
 // Password visibility toggle
-const passShowBtn = document.querySelector('.pass-show');
-const passIcon = document.querySelector('.pass-icon');
-const passwordInput = document.getElementById('password-text');
+const passShowBtn = document.querySelector(".pass-show");
+const passIcon = document.querySelector(".pass-icon");
+const passwordInput = document.getElementById("password-text");
 
 if (passShowBtn && passwordInput && passIcon) {
-  passShowBtn.addEventListener('click', () => {
-    if (passwordInput.type === 'password') {
-      passwordInput.type = 'text';
-      passIcon.src = '../assets/eye.png';
+  passShowBtn.addEventListener("click", () => {
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      passIcon.src = "../assets/eye.png";
     } else {
-      passwordInput.type = 'password';
-      passIcon.src = '../assets/eye-crossed.png';
+      passwordInput.type = "password";
+      passIcon.src = "../assets/eye-crossed.png";
     }
   });
 }
 
 // Button loading state function
 function setButtonLoading(isLoading) {
-  const btn = document.querySelector('.login-btn');
+  const btn = document.querySelector(".login-btn");
   if (!btn) return;
 
   if (isLoading) {
@@ -39,12 +39,12 @@ function setButtonLoading(isLoading) {
 
 // Login function
 async function login() {
-  const username = document.getElementById('username-text').value;
-  const password = document.getElementById('password-text').value;
+  const username = document.getElementById("username-text").value;
+  const password = document.getElementById("password-text").value;
 
   // Basic validation
   if (!username || !password) {
-    alert('Please enter both username and password');
+    alert("Please enter both username and password");
     return;
   }
 
@@ -53,36 +53,36 @@ async function login() {
 
   try {
     // Simulate a small delay for better UX
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     // For demo purposes, accept any credentials
     // In a real application, this would validate against a backend
-    localStorage.setItem('logged-in', 'true');
-    localStorage.setItem('username', username);
-    
+    localStorage.setItem("logged-in", "true");
+    localStorage.setItem("username", username);
+
     // Redirect to home page
-    window.location.href = '/home';
+    window.location.href = "/home";
   } catch (error) {
-    console.error('Login error:', error);
+    console.error("Login error:", error);
     setButtonLoading(false);
-    alert('An error occurred during login');
+    alert("An error occurred during login");
   }
 }
 
 // Allow Enter key to submit
-document.addEventListener('DOMContentLoaded', () => {
-  const usernameInput = document.getElementById('username-text');
-  const passwordInput = document.getElementById('password-text');
-  
+document.addEventListener("DOMContentLoaded", () => {
+  const usernameInput = document.getElementById("username-text");
+  const passwordInput = document.getElementById("password-text");
+
   if (usernameInput) {
-    usernameInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') login();
+    usernameInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") login();
     });
   }
-  
+
   if (passwordInput) {
-    passwordInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') login();
+    passwordInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") login();
     });
   }
 });

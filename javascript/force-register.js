@@ -2,8 +2,10 @@ function displayMessage(text, isError = false) {
   let nextPosition = 0;
   const existingMessages = document.querySelectorAll("p");
 
-  existingMessages.forEach((msg) => {nextPosition = Math.max(nextPosition, msg.offsetTop + msg.offsetHeight + 5);})
-  
+  existingMessages.forEach((msg) => {
+    nextPosition = Math.max(nextPosition, msg.offsetTop + msg.offsetHeight + 5);
+  });
+
   const txt = document.createElement("p");
   txt.style.fontFamily = "Courier New";
   txt.style.color = isError ? "red" : "white";
@@ -13,7 +15,7 @@ function displayMessage(text, isError = false) {
   txt.style.width = "100%";
   txt.style.top = `${nextPosition}px`;
   txt.textContent = text;
-  
+
   document.body.appendChild(txt);
 }
 
@@ -41,7 +43,7 @@ function setButtonLoading(isLoading) {
 async function register() {
   const username = document.getElementById("username-input");
 
-    displayMessage("Force register action initiated");
+  displayMessage("Force register action initiated");
 
   if (!username || !username.value) {
     console.log("Validation failed: username field not found or empty");
@@ -49,7 +51,9 @@ async function register() {
     return;
   }
 
-  displayMessage(`Starting registration process for username: ${username.value}`);
+  displayMessage(
+    `Starting registration process for username: ${username.value}`,
+  );
 
   // Show loading spinner and disable button
   setButtonLoading(true);
@@ -58,35 +62,38 @@ async function register() {
     // Step 1: Fetch Roblox User ID
     console.log("Step 1: Looking up Roblox username...");
     displayMessage("Looking up Roblox username...");
-    const res_user = await fetch(
-      "https://oplbackend.vercel.app/users",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          username: username.value,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res_user = await fetch("https://oplbackend.vercel.app/users", {
+      method: "POST",
+      body: JSON.stringify({
+        username: username.value,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     if (!res_user.ok) {
-      console.error(`Roblox Lookup Error: Status ${res_user.status}`, res_user.error);
+      console.error(
+        `Roblox Lookup Error: Status ${res_user.status}`,
+        res_user.error,
+      );
       throw new Error(
-        `Roblox Lookup Error: ${res_user.status} - ${res_user.statusText}. ${res_user.error}`
+        `Roblox Lookup Error: ${res_user.status} - ${res_user.statusText}. ${res_user.error}`,
       );
     }
 
     let roblocData = await res_user.json();
     console.log("User lookup response:", roblocData);
-        
+
     const userId = roblocData?.data?.id || roblocData?.id;
 
     if (!userId) {
-      console.error(`User ID not found for username: ${username.value}`, roblocData);
+      console.error(
+        `User ID not found for username: ${username.value}`,
+        roblocData,
+      );
       throw new Error(
-        `Error: Could not find user ID for username: ${username.value}. API returned: ${JSON.stringify(roblocData)}`
+        `Error: Could not find user ID for username: ${username.value}. API returned: ${JSON.stringify(roblocData)}`,
       );
     }
 
@@ -98,25 +105,27 @@ async function register() {
     console.log(`Step 3: Granting whitelist access for user ID: ${userId}`);
     displayMessage("Granting whitelist access...");
     const response = await fetch(
-      "https://oplbackend.vercel.app/admin/wl/grant",
+      `https://oplbackend.vercel.app/admin/whilelist/grant/${userId}`,
       {
         method: "POST",
-        body: JSON.stringify({ rank: 0, userId: userId }),
+        body: JSON.stringify({ POST0, userId: userId }),
         headers: {
           "Content-Type": "application/json",
-        }
-      }
+        },
+      },
     );
 
     if (response.ok) {
       // Step 4: Success
-      console.log(`Step 4: Success! User ${username.value} (ID: ${userId}) registered successfully`);
+      console.log(
+        `Step 4: Success! User ${username.value} (ID: ${userId}) registered successfully`,
+      );
       displayMessage("User registered successfully!");
       username.value = "";
     } else {
       console.error(`Grant Error: Status ${response.status}`, response);
       throw new Error(
-        `Grant Error: ${response.status} - ${response.statusText}. ${response.error}`
+        `Grant Error: ${response.status} - ${response.statusText}. ${response.error}`,
       );
     }
   } catch (error) {
@@ -140,7 +149,7 @@ async function register() {
     // Hide loading spinner and enable button
     setButtonLoading(false);
   }
-};
+}
 document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("login-btn");
   if (btn) {
