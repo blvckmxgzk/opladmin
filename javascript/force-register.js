@@ -59,7 +59,7 @@ async function register() {
     console.log("Step 1: Looking up Roblox username...");
     displayMessage("Looking up Roblox username...");
     const res_user = await fetch(
-      "https://oplbackend.onrender.com/users",
+      "https://oplbackend.vercel.app/users",
       {
         method: "POST",
         body: JSON.stringify({
@@ -100,7 +100,7 @@ async function register() {
     console.log(`Step 3: Granting whitelist access for user ID: ${userId}`);
     displayMessage("Granting whitelist access...");
     const response = await fetch(
-      "https://oplbackend.onrender.com/admin/wl/grant",
+      "https://oplbackend.vercel.app/admin/wl/grant",
       {
         method: "POST",
         body: JSON.stringify({ rank: 0, userid: userId }),
