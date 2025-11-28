@@ -61,16 +61,10 @@ body {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   width: 100%;
   height: 100%;
-  display: -webkit-box;
   display: -webkit-flex;
   display: -moz-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-box-pack: center;
   overflow: hidden;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
 }
 
 body::before {
@@ -502,7 +496,7 @@ body::before {
 
   body::before {
     width: 100%;
-    height: 100%
+    height: 100%;
     top: -25%;
     right: -10%;
   }
