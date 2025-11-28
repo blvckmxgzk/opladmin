@@ -1,4 +1,4 @@
-เfunction displayMessage(text, isError = false) {
+function displayMessage(text, isError = false) {
   let nextPosition = 0;
   const existingMessages = document.querySelectorAll("p");
 
