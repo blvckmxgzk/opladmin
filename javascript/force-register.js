@@ -2,9 +2,12 @@ function displayMessage(text, isError = false) {
   const txt = document.createElement("p");
   txt.style.fontFamily = "Courier New";
   txt.style.color = isError ? "red" : "white";
-  txt.style.fontSize = "16px";
-  txt.style.width = "100%";
+  txt.style.fontSize = "14px";
+  txt.style.padding = "8px 16px";
+  txt.style.margin = "4px 0";
   txt.style.textAlign = "left";
+  txt.style.wordWrap = "break-word";
+  txt.style.maxWidth = "90vw";
   txt.textContent = text;
   document.body.appendChild(txt);
 }
@@ -136,10 +139,11 @@ async function register() {
   }
 };
 
-// Attach event listener to button
+window.register = register;
+
 document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("login-btn");
   if (btn) {
-    btn.addEventListener("click", register)
+    btn.addEventListener("click", register);
   }
 });
