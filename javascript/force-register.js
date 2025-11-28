@@ -72,23 +72,22 @@ async function register() {
     );
 
     if (!res_user.ok) {
-      console.error(`Roblox Lookup Error: Status ${res_user.status}`, res_user);
+      const errorText = await res_user.text();
+      console.error(`Roblox Lookup Error: Status ${res_user.status}`, errorText);
       throw new Error(
-        `Roblox Lookup Error: ${res_user.status} - ${res_user.error.stack}`
+        `Roblox Lookup Error: ${res_user.status} - ${res_user.statusText}. ${errorText}`
       );
     }
 
     let roblocData = await res_user.json();
-
-    console.log(roblocData)
+    console.log("User lookup response:", roblocData);
         
-    const userId =
-      roblocData.data && roblocData.data ? roblocData.data.id : null;
+    const userId = roblocData?.data?.id || roblocData?.id;
 
     if (!userId) {
-      console.error(`User ID not found for username: ${username.value}`);
+      console.error(`User ID not found for username: ${username.value}`, roblocData);
       throw new Error(
-        `Error: Could not find user ID for username: ${username.value}`
+        `Error: Could not find user ID for username: ${username.value}. API returned: ${JSON.stringify(roblocData)}`
       );
     }
 
@@ -116,9 +115,10 @@ async function register() {
       displayMessage("✓ User registered successfully!");
       username.value = "";
     } else {
-      console.error(`Grant Error: Status ${response.status}`, response);
+      const errorText = await response.text();
+      console.error(`Grant Error: Status ${response.status}`, errorText);
       throw new Error(
-        `Grant Error: ${response.status} - ${response.error.stack}`
+        `Grant Error: ${response.status} - ${response.statusText}. ${errorText}`
       );
     }
   } catch (error) {
