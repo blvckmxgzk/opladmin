@@ -105,10 +105,10 @@ async function register() {
     console.log(`Step 3: Granting whitelist access for user ID: ${userId}`);
     displayMessage("Granting whitelist access...");
     const response = await fetch(
-      `https://oplbackend.vercel.app/admin/whilelist/grant/${userId}`,
+      `https://oplbackend.vercel.app/admin/whilelist/assign/${userId}`,
       {
         method: "POST",
-        body: JSON.stringify({ POST0, userId: userId }),
+        body: JSON.stringify({ rank: 0 }),
         headers: {
           "Content-Type": "application/json",
         },
