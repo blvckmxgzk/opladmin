@@ -52,16 +52,21 @@ async function login() {
   setButtonLoading(true);
 
   try {
-    // Simulate a small delay for better UX
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    // For demo purposes, accept any credentials
-    // In a real application, this would validate against a backend
-    localStorage.setItem("logged-in", "true");
-    localStorage.setItem("username", username);
+    const response = await fetch("https://oplbackend.vercel.app/admin/authenticate/login",{
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
 
     // Redirect to home page
-    window.location.href = "/home";
+    if (response.success === true) {
+      location.href = "/home";
+    } else {
+      alert(response.error)
+      setButtonLoading(false);
+    }
   } catch (error) {
     console.error("Login error:", error);
     setButtonLoading(false);
