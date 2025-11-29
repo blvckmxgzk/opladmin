@@ -1,4 +1,4 @@
-const authenticate = fetch(
+async function redirect(){const authenticate = await fetch(
   "https://oplbackend.vercel.app/admin/authenticate",
   {
     method: "POST",
@@ -13,10 +13,12 @@ const authenticate = fetch(
   },
 );
 
-const response = authenticate.json()
+const response = await authenticate.json()
 
 if (response.success) {
   location.href = "/home";
 } else {
   location.href = "/login";
-}
+}}
+
+document.addEventListener("DOMContentLoaded", redirect)
