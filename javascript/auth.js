@@ -13,7 +13,9 @@ const authenticate = await fetch(
   },
 );
 
-if (authenticate.success) {
+const response = await authenticate.json()
+
+if (response.success) {
   location.href = "/home";
 } else {
   location.href = "/login";
