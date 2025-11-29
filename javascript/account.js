@@ -71,6 +71,9 @@ async function login() {
 
     // Redirect to home page
     if (response.success === true) {
+      if (!localStorage.getItem("deviceId")) {
+        localStorage.setItem("deviceId", crypto.randomUUID());
+      }
       location.href = "/home";
     } else {
       alert(response.error);
