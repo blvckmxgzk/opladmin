@@ -42,6 +42,8 @@ async function login() {
   const username = document.getElementById("username-text").value;
   const password = document.getElementById("password-text").value;
 
+  const new_deviceId = crypto.randomUUID();
+
   // Basic validation
   if (!username || !password) {
     alert("Please enter both username and password");
@@ -52,16 +54,29 @@ async function login() {
   setButtonLoading(true);
 
   try {
+    let userdata = await fetch("https://oplbackend.vercel.app/users", {
+      method: "POST",
+      body: JSON.stringify({
+        username: username,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    userdata = await userdata.json();
+
     const response = await fetch(
       "https://oplbackend.vercel.app/admin/authenticate/login",
       {
         method: "POST",
         body: JSON.stringify({
-          user: username,
+          user: userdata.id,
           pass: password,
-          deviceId: localStorage.getItem("deviceId")
-            ? localStorage.getItem("deviceId")
-            : crypto.randomUUID(),
+          deviceId:
+            localStorage.getItem("deviceId") !== null
+              ? localStorage.getItem("deviceId")
+              : new_deviceId,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +89,7 @@ async function login() {
     // Redirect to home page if authentication succeeds
     if (data.success === true) {
       if (!localStorage.getItem("deviceId")) {
-        localStorage.setItem("deviceId", crypto.randomUUID());
+        localStorage.setItem("deviceId", new_deviceId);
       }
       location.href = "/home";
     } else {
