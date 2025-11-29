@@ -13,7 +13,7 @@ const authenticate = await fetch(
   },
 );
 
-if (authenticate.success === true) {
+if (authenticate.success) {
   location.href = "/home";
 } else {
   location.href = "/login";

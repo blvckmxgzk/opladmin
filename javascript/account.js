@@ -69,15 +69,18 @@ async function login() {
       },
     );
 
-    // Redirect to home page
-    if (response.success === true) {
+    const data = await response.json();
+
+    // Redirect to home page if authentication succeeds
+    if (data.success === true) {
       if (!localStorage.getItem("deviceId")) {
         localStorage.setItem("deviceId", crypto.randomUUID());
       }
       location.href = "/home";
     } else {
-      alert(response.error);
-      setButtonLoading(false);
+      // Redirect to login page if authentication fails
+      alert(data.error || "Authentication failed");
+      location.href = "/login";
     }
   } catch (error) {
     console.error("Login error:", error);
