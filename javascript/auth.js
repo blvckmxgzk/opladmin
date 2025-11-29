@@ -25,5 +25,3 @@ async function authenticate() {
 }
 
 document.addEventListener("DOMContentLoaded", authenticate);
-
-export default authenticate;
