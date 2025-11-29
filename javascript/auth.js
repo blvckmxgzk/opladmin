@@ -1,4 +1,4 @@
-const authenticate = await fetch(
+const authenticate = fetch(
   "https://oplbackend.vercel.app/admin/authenticate",
   {
     method: "POST",
@@ -13,7 +13,7 @@ const authenticate = await fetch(
   },
 );
 
-const response = await authenticate.json()
+const response = authenticate.json()
 
 if (response.success) {
   location.href = "/home";
