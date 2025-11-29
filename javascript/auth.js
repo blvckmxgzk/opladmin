@@ -1,17 +1,18 @@
-async function redirect() {
+async function authenticate() {
   const authenticate = await fetch(
     "https://oplbackend.vercel.app/admin/authenticate",
     {
       method: "POST",
       body: JSON.stringify({
-        deviceId: localStorage.getItem("deviceId") !== null
-          ? localStorage.getItem("deviceId")
-          : "",
+        deviceId:
+          localStorage.getItem("deviceId") !== null
+            ? localStorage.getItem("deviceId")
+            : "",
       }),
       headers: {
         "Content-Type": "application/json",
       },
-    },
+    }
   );
 
   const response = await authenticate.json();
@@ -23,4 +24,6 @@ async function redirect() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", redirect);
+document.addEventListener("DOMContentLoaded", authenticate);
+
+export default authenticate;

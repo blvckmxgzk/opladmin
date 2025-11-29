@@ -71,7 +71,7 @@ async function login() {
       {
         method: "POST",
         body: JSON.stringify({
-          user: userdata.id,
+          user: userdata.data.id,
           pass: password,
           deviceId:
             localStorage.getItem("deviceId") !== null
@@ -81,7 +81,7 @@ async function login() {
         headers: {
           "Content-Type": "application/json",
         },
-      },
+      }
     );
 
     const data = await response.json();
@@ -95,7 +95,6 @@ async function login() {
     } else {
       // Redirect to login page if authentication fails
       alert(data.error || "Authentication failed");
-      location.href = "/login";
     }
   } catch (error) {
     console.error("Login error:", error);
