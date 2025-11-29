@@ -52,19 +52,28 @@ async function login() {
   setButtonLoading(true);
 
   try {
-    const response = await fetch("https://oplbackend.vercel.app/admin/authenticate/login",{
-      method: "POST",
-      body: JSON.stringify({ username, password }),
-      headers: {
-        "Content-Type": "application/json",
-      }
-    })
+    const response = await fetch(
+      "https://oplbackend.vercel.app/admin/authenticate/login",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          user: username,
+          pass: password,
+          deviceId: localStorage.getItem("deviceId")
+            ? localStorage.getItem("deviceId")
+            : crypto.randomUUID(),
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
 
     // Redirect to home page
     if (response.success === true) {
       location.href = "/home";
     } else {
-      alert(response.error)
+      alert(response.error);
       setButtonLoading(false);
     }
   } catch (error) {
