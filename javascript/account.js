@@ -1,3 +1,23 @@
+const fetchLogin = await fetch("https://oplbackend.vercel.app/admin/authenticate",{
+  method: "POST",
+  body: JSON.stringify({
+    deviceId: localStorage.getItem("deviceId") !== null
+    ? localStorage.getItem("deviceId")
+    : "",
+  }),
+  headers: {
+    "Content-Type": "application/json",
+  }
+})
+
+const isLoggedIn = await fetchLogin.json()
+
+if (response.success) {
+  location.href = "/home";
+} else {
+  location.href = "/login";
+}
+
 // Password visibility toggle
 const passShowBtn = document.querySelector(".pass-show");
 const passIcon = document.querySelector(".pass-icon");
