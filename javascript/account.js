@@ -1,28 +1,28 @@
-async function authenticate() {
-  const authenticate = await fetch(
-    "https://oplbackend.vercel.app/admin/authenticate",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        deviceId:
-          localStorage.getItem("deviceId") !== null
-            ? localStorage.getItem("deviceId")
-            : "",
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+// async function authenticate() {
+//   const authenticate = await fetch(
+//     "https://oplbackend.vercel.app/admin/authenticate",
+//     {
+//       method: "POST",
+//       body: JSON.stringify({
+//         deviceId:
+//           localStorage.getItem("deviceId") !== null
+//             ? localStorage.getItem("deviceId")
+//             : "",
+//       }),
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     }
+//   );
 
-  const response = await authenticate.json();
+//   const response = await authenticate.json();
 
-  if (response.success) {
-    location.href = "../home";
-  }
-}
+//   if (response.success) {
+//     location.href = "../home";
+//   }
+// }
 
-document.addEventListener("DOMContentLoaded", authenticate);
+// document.addEventListener("DOMContentLoaded", authenticate);
 
 // Password visibility toggle
 const passShowBtn = document.querySelector(".pass-show");
